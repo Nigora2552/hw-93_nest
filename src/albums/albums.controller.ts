@@ -48,7 +48,7 @@ export class AlbumsController {
         destination: './public/uploads/albums',
         filename: (_req, file, callback) => {
           const uniqueSuffix = randomUUID();
-          callback(null, `artist-${uniqueSuffix}${extname(file.originalname)}`);
+          callback(null, `albums-${uniqueSuffix}${extname(file.originalname)}`);
         },
       }),
     }),

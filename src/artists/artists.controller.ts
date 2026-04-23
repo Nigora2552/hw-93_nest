@@ -39,7 +39,10 @@ export class ArtistsController {
         destination: './public/uploads/artists',
         filename: (_req, file, callback) => {
           const uniqueSuffix = randomUUID();
-          callback(null, `artist-${uniqueSuffix}${extname(file.originalname)}`);
+          callback(
+            null,
+            `artists-${uniqueSuffix}${extname(file.originalname)}`,
+          );
         },
       }),
     }),
