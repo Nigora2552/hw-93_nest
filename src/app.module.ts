@@ -16,7 +16,12 @@ import { TracksController } from './tracks/tracks.controller';
       { name: Album.name, schema: AlbumSchema },
     ]),
   ],
-  controllers: [AppController, ArtistsController, AlbumsController, TracksController],
+  controllers: [
+    AppController,
+    ArtistsController,
+    AlbumsController,
+    TracksController,
+  ],
   providers: [AppService],
 })
 export class AppModule {}
