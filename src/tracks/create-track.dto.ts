@@ -5,3 +5,7 @@ export class CreateTrackDto {
   trackNumber: number;
   isPublished: boolean;
 }
+
+export class QueryTrack {
+  album?: string;
+}

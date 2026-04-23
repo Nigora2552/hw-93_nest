@@ -26,10 +26,6 @@ export class AlbumsController {
     @InjectModel(Artist.name)
     private artistModel: Model<ArtistDocument>,
   ) {}
-  // @Get()
-  // getAll() {
-  //   return this.albumModel.find();
-  // }
   @Get()
   getAllOrByQuery(@Query() artist: SearchAlbumDto) {
     if (artist) {
@@ -76,6 +72,12 @@ export class AlbumsController {
   }
   @Delete(':id')
   async delete(@Param('id') id: string) {
-    return this.albumModel.findByIdAndDelete(id);
+    const deletedAlbum = await this.albumModel.findByIdAndDelete(id);
+
+    if (!deletedAlbum) {
+      return { message: `Альбом с id ${id} не найден` };
+    }
+
+    return { message: ' Альбом был успешно удален' };
   }
 }
