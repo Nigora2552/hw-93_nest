@@ -7,6 +7,10 @@ export interface UserMethods {
   generateToken: () => void;
   checkPassword: (this: UserDocument, password: string) => Promise<boolean>;
 }
+export enum UserRole {
+  ADMIN = 'admin',
+  USER = 'user',
+}
 
 export type UserDocument = User & Document & UserMethods;
 @Schema()
@@ -19,6 +23,8 @@ export class User {
   displayName: string;
   @Prop({ required: true })
   token: string;
+  @Prop({ default: UserRole.USER, enum: UserRole })
+  role: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
@@ -37,7 +43,7 @@ UserSchema.methods.checkPassword = function (
   return bcrypt.compare(password, this.password);
 };
 
-UserSchema.methods.generateToken = function () {
+UserSchema.methods.generateToken = function (this: UserDocument) {
   this.token = randomUUID();
 };
 
